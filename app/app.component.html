@@ -1,0 +1,79 @@
+<div class="main">
+  <div class="container">
+    <div class="flexbox">
+      <div class="one">
+        <div class="content">
+          <div>
+            <div class="user-details">
+              <div class="input-box">
+                <span class="details">Enter Voltage Name ("HV", "LV" or "LV-Sub")</span>
+                <input type="text" id="Voltage" value="12" placeholder="Enter Voltage" [(ngModel)]="voltage" required />
+              </div>
+              <div class="input-box">
+                <span class="details">Enter Dno (DNO number from 10 to 23)</span>
+                <input type="text" id="Dno" value="HV" placeholder="Dno" [(ngModel)]="dno" required />
+              </div>
+              <div class="input-box">
+                <span class="details">Enter Start Date (DD-MM-YYYY)</span>
+                <input type="text" id="startdate" placeholder="dd-mm-yyyy" [(ngModel)]="startdate" required />
+              </div>
+              <div class="input-box">
+                <span class="details">Enter End Date (DD-MM-YYYY) </span>
+                <input type="text" id="enddate" placeholder="dd-mm-yyyy" [(ngModel)]="enddate" required />
+              </div>
+            </div>
+            <div class="button">
+              <input type="button" class="form-inline button" (click)="this.ConsumeAPI()" value="Fetch Chart" />
+            </div>
+            <div class="error" *ngIf="this.UiValidationMsg.length>0">
+              {{this.UiValidationMsg}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="two">
+        <div class="user-details">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Voltage</th>
+                <th scope="col">Dno</th>
+                <th scope="col"> Start Date</th>
+                <th scope="col">End Date</th>
+                <th scope="col">Edit Entry</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let pd of PersistData">
+                <td>
+                  <span *ngIf="pd.new" class="badge badge-primary">new</span>
+                  {{pd.voltage}}
+                </td>
+                <td>{{pd.dno}}</td>
+                <td>{{pd.startdate }}</td>
+                <td>{{pd.enddate }}</td>
+                <td>
+                  <button (click)="Edit(pd)" class="btn btn-danger btn-sm">
+                    <span class="oi oi-trash">Edit Me</span>
+                  </button>
+                </td>
+              </tr>
+              
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+    <p></p>
+    <div class="container">
+      <div class="content">
+        <div>
+          <div class="user-details">
+            <app-barchart></app-barchart>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
